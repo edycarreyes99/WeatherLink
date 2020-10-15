@@ -1,12 +1,22 @@
 using System;
 using System.Net.Mime;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using WeatherLink.Models;
 
 namespace WeatherLink.Controllers
 {
     public class ApiController : Controller
     {
+        private readonly ApiDbContext _apiDbContext;
+
+        public ApiController(ApiDbContext apiDbContext)
+        {
+            _apiDbContext = apiDbContext;
+        }
+
         // GET
         public IActionResult Index()
         {
@@ -21,12 +31,12 @@ namespace WeatherLink.Controllers
             return View();
         }
 
-        // Post
+        // Metodo que se ejecuta cuando se quiere agregar una nueva estacion
         [HttpPost]
         [Route("AgregarEstacion")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult AgregarEstacion(string nombre, double latitud, double longitud)
+        public async Task<IActionResult> AgregarEstacion(string nombre, double latitud, double longitud)
         {
             ViewBag.nombre = nombre;
             ViewBag.latitud = latitud;
@@ -36,7 +46,7 @@ namespace WeatherLink.Controllers
             {
                 return Json(new
                 {
-                    status = 400,
+                    status = StatusCode(StatusCodes.Status400BadRequest).StatusCode,
                     message = "El nombre tiene que ser valido y es un parametro requerido."
                 });
             }
@@ -45,7 +55,7 @@ namespace WeatherLink.Controllers
             {
                 return BadRequest(Json(new
                 {
-                    status = 400,
+                    status = StatusCode(StatusCodes.Status400BadRequest).StatusCode,
                     message = "La latitud es un parametro requerido y tiene que ser un formato válido."
                 }));
             }
@@ -54,12 +64,16 @@ namespace WeatherLink.Controllers
             {
                 return BadRequest(Json(new
                 {
-                    status = 400,
+                    status = StatusCode(StatusCodes.Status400BadRequest).StatusCode,
                     message = "La longitud es un parametro requerido y tiene que ser un formato válido."
                 }));
             }
 
-            return View();
+            return Ok(new
+            {
+                status = StatusCode(StatusCodes.Status200OK).StatusCode,
+                data = await _apiDbContext.Estaciones.ToListAsync()
+            });
         }
     }
 }

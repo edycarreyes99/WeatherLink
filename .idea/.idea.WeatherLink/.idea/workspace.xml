@@ -9,7 +9,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c94a409a-a4a2-4f58-9f41-4f458601b5ba" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Models/ApiDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.WeatherLink/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WeatherLink/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WeatherLink/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WeatherLink/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/ApiController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/ApiController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/EstacionesViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/EstacionesViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Api/Estaciones.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/Api/Estaciones.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WeatherLink.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WeatherLink.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,25 +35,30 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/AEEA0A49-4DB9-4564-AF1C-B19E66A3E4B3/13/DeveloperExceptionPageExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/366E8AE0-1B9B-4017-9558-D9119070DE22/B/RazorPage.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1566B945-F911-4360-B501-5ADA4E22F19D/D/RazorPageBase.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/08BEEF07-8B27-4C9B-9B70-7BF7F188D920/9/EntityFrameworkServiceCollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/366E8AE0-1B9B-4017-9558-D9119070DE22/D/RazorPageBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/39C59077-AD03-4E0B-85B4-BCBBBBC91581/7/IHtmlContent.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1566B945-F911-4360-B501-5ADA4E22F19D/B/RazorPage.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/000CBD59-71DC-4C3E-9147-6CE84422B02B/9/HtmlEncoder.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B4EA629E-BF1F-4A19-A84C-1A5842455249/a8/f3e9c99e/MySqlPropertyBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/Models/ApiViewModel.cs" />
         <option value="$PROJECT_DIR$/Views/Home/Index.cshtml" />
         <option value="$PROJECT_DIR$/Controllers/Api.cs" />
-        <option value="$PROJECT_DIR$/Views/Api/Estaciones.cshtml" />
         <option value="$PROJECT_DIR$/Views/Shared/_Layout.cshtml" />
         <option value="$PROJECT_DIR$/Views/Api/Index.cshtml" />
-        <option value="$PROJECT_DIR$/Models/EstacionesViewModel.cs" />
         <option value="$PROJECT_DIR$/Views/Api/AgregarEstacion.cshtml" />
+        <option value="$PROJECT_DIR$/Properties/launchSettings.json" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/Program.cs" />
+        <option value="$PROJECT_DIR$/Models/ApiDbContext.cs" />
+        <option value="$PROJECT_DIR$/Models/EstacionesViewModel.cs" />
         <option value="$PROJECT_DIR$/Startup.cs" />
+        <option value="$PROJECT_DIR$/Views/Api/Estaciones.cshtml" />
         <option value="$PROJECT_DIR$/Controllers/ApiController.cs" />
       </list>
     </option>
@@ -111,7 +123,7 @@
       <option name="presentableId" value="Default" />
       <updated>1602368199871</updated>
       <workItem from="1602368208272" duration="5919000" />
-      <workItem from="1602741984193" duration="8551000" />
+      <workItem from="1602741984193" duration="14649000" />
     </task>
     <servers />
   </component>
@@ -140,22 +152,22 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="555" y="215" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1602786855951" />
-    <state width="1878" height="277" key="GridCell.Tab.0.bottom" timestamp="1602786633773">
+    <state width="1878" height="277" key="GridCell.Tab.0.bottom" timestamp="1602794541622">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="277" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1602786633773" />
-    <state width="1878" height="277" key="GridCell.Tab.0.center" timestamp="1602786633772">
+    <state width="1878" height="277" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1602794541622" />
+    <state width="1878" height="277" key="GridCell.Tab.0.center" timestamp="1602794541622">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="277" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1602786633772" />
-    <state width="1878" height="277" key="GridCell.Tab.0.left" timestamp="1602786633771">
+    <state width="1878" height="277" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1602794541622" />
+    <state width="1878" height="277" key="GridCell.Tab.0.left" timestamp="1602794541622">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="277" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1602786633771" />
-    <state width="1878" height="277" key="GridCell.Tab.0.right" timestamp="1602786633772">
+    <state width="1878" height="277" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1602794541622" />
+    <state width="1878" height="277" key="GridCell.Tab.0.right" timestamp="1602794541622">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="277" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1602786633772" />
+    <state width="1878" height="277" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1602794541622" />
     <state width="224" height="477" key="HiddenNamespacesPopup" timestamp="1602786865479">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
