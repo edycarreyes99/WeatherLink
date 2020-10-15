@@ -142,6 +142,53 @@ namespace WeatherLink.Controllers
             });
         }
 
-        
+        [HttpPut]
+        [Route("ActualizarEstacion")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> ActualizarEstacion(int id, string nombre)
+        {
+            if (string.IsNullOrEmpty(nombre))
+            {
+                return Json(new
+                {
+                    status = StatusCode(StatusCodes.Status400BadRequest).StatusCode,
+                    message = "El nombre tiene que ser valido y es un parametro requerido."
+                });
+            }
+
+            if (id == 0)
+            {
+                return Json(new
+                {
+                    status = StatusCode(StatusCodes.Status400BadRequest).StatusCode,
+                    message = "El Id tiene que ser valido y es un parametro requerido."
+                });
+            }
+
+            if (_apiDbContext.Estaciones.Where(e => e.Id.Equals(id)).ToList().Count == 0)
+            {
+                return Json(new
+                {
+                    status = StatusCode(StatusCodes.Status400BadRequest).StatusCode,
+                    message = "El id ingresado no pertenece a ninguna estacion."
+                });
+            }
+
+            EstacionesViewModel estacionActualizar = _apiDbContext.Estaciones.First(e => e.Id.Equals(id));
+
+            estacionActualizar.Name = nombre;
+
+            _apiDbContext.Update(estacionActualizar);
+
+            await _apiDbContext.SaveChangesAsync();
+
+            return Ok(new
+            {
+                status = StatusCode(StatusCodes.Status200OK).StatusCode,
+                message = $"La estacion con el id {id} se ha actualizado correctamente.",
+                data = estacionActualizar
+            });
+        }
     }
 }
