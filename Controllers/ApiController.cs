@@ -33,7 +33,7 @@ namespace WeatherLink.Controllers
         // Metodo que se ejecuta cuando se quiere extraer todas las estaciones
         [Route("Estaciones")]
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Estaciones()
         {
@@ -48,7 +48,7 @@ namespace WeatherLink.Controllers
         // Metodo que se ejecuta cuando se quiere extraer todas las estaciones
         [Route("Estacion")]
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Estacion(int id)
         {
@@ -144,7 +144,7 @@ namespace WeatherLink.Controllers
 
         [HttpPut]
         [Route("ActualizarEstacion")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> ActualizarEstacion(int id, string nombre)
         {
@@ -188,6 +188,42 @@ namespace WeatherLink.Controllers
                 status = StatusCode(StatusCodes.Status200OK).StatusCode,
                 message = $"La estacion con el id {id} se ha actualizado correctamente.",
                 data = estacionActualizar
+            });
+        }
+
+        [HttpDelete]
+        [Route("EliminarEstacion")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult EliminarEstacion(int id)
+        {
+            if (id == 0)
+            {
+                return Json(new
+                {
+                    status = StatusCode(StatusCodes.Status400BadRequest).StatusCode,
+                    message = "El id tiene que tener un formato valido y es requerido para ejecutar esta accion."
+                });
+            }
+
+            if (_apiDbContext.Estaciones.Where(e => e.Id.Equals(id)).ToList().Count == 0)
+            {
+                return Json(new
+                {
+                    status = StatusCode(StatusCodes.Status400BadRequest).StatusCode,
+                    message = "El id ingresado no pertenece a ninguna estacion."
+                });
+            }
+
+            EstacionesViewModel estacionEliminar = _apiDbContext.Estaciones.First(e => e.Id.Equals(id));
+
+            _apiDbContext.Remove(estacionEliminar);
+
+            return Ok(new
+            {
+                status = StatusCode(StatusCodes.Status200OK).StatusCode,
+                message = $"La estacion con el id {id} se ha eliminado correctamente.",
+                data = estacionEliminar
             });
         }
     }
