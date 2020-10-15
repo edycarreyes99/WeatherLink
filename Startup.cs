@@ -49,6 +49,7 @@ namespace WeatherLink
 
             app.UseEndpoints(endpoints =>
             {
+                // Ruta principal
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Api}/{action=Index}/{id?}");

@@ -9,15 +9,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c94a409a-a4a2-4f58-9f41-4f458601b5ba" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Controllers/ApiController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Models/EstacionesViewModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Views/Api/Estaciones.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Views/Api/Index.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Views/Api/AgregarEstacion.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WeatherLink/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WeatherLink/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WeatherLink/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WeatherLink/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/ApiController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/ApiController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/EstacionesViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/EstacionesViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Startup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/Shared/_Layout.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Api/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/Api/Index.cshtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +33,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/AEEA0A49-4DB9-4564-AF1C-B19E66A3E4B3/13/DeveloperExceptionPageExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/366E8AE0-1B9B-4017-9558-D9119070DE22/B/RazorPage.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1566B945-F911-4360-B501-5ADA4E22F19D/D/RazorPageBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/366E8AE0-1B9B-4017-9558-D9119070DE22/D/RazorPageBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/39C59077-AD03-4E0B-85B4-BCBBBBC91581/7/IHtmlContent.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1566B945-F911-4360-B501-5ADA4E22F19D/B/RazorPage.cs" root0="SKIP_HIGHLIGHTING" />
@@ -47,13 +46,14 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/Models/ApiViewModel.cs" />
         <option value="$PROJECT_DIR$/Views/Home/Index.cshtml" />
-        <option value="$PROJECT_DIR$/Startup.cs" />
-        <option value="$PROJECT_DIR$/Models/EstacionesViewModel.cs" />
         <option value="$PROJECT_DIR$/Controllers/Api.cs" />
-        <option value="$PROJECT_DIR$/Controllers/ApiController.cs" />
         <option value="$PROJECT_DIR$/Views/Api/Estaciones.cshtml" />
         <option value="$PROJECT_DIR$/Views/Shared/_Layout.cshtml" />
         <option value="$PROJECT_DIR$/Views/Api/Index.cshtml" />
+        <option value="$PROJECT_DIR$/Models/EstacionesViewModel.cs" />
+        <option value="$PROJECT_DIR$/Views/Api/AgregarEstacion.cshtml" />
+        <option value="$PROJECT_DIR$/Startup.cs" />
+        <option value="$PROJECT_DIR$/Controllers/ApiController.cs" />
       </list>
     </option>
   </component>
@@ -116,7 +116,7 @@
       <option name="presentableId" value="Default" />
       <updated>1602368199871</updated>
       <workItem from="1602368208272" duration="5919000" />
-      <workItem from="1602741984193" duration="2489000" />
+      <workItem from="1602741984193" duration="7805000" />
     </task>
     <servers />
   </component>
@@ -141,21 +141,21 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1878" height="277" key="GridCell.Tab.0.bottom" timestamp="1602744496790">
+    <state width="1878" height="277" key="GridCell.Tab.0.bottom" timestamp="1602786445721">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="277" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1602744496790" />
-    <state width="1878" height="277" key="GridCell.Tab.0.center" timestamp="1602744496790">
+    <state width="1878" height="277" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1602786445721" />
+    <state width="1878" height="277" key="GridCell.Tab.0.center" timestamp="1602786445721">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="277" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1602744496790" />
-    <state width="1878" height="277" key="GridCell.Tab.0.left" timestamp="1602744496789">
+    <state width="1878" height="277" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1602786445721" />
+    <state width="1878" height="277" key="GridCell.Tab.0.left" timestamp="1602786445720">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="277" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1602744496789" />
-    <state width="1878" height="277" key="GridCell.Tab.0.right" timestamp="1602744496790">
+    <state width="1878" height="277" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1602786445720" />
+    <state width="1878" height="277" key="GridCell.Tab.0.right" timestamp="1602786445721">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="277" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1602744496790" />
+    <state width="1878" height="277" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1602786445721" />
   </component>
 </project>
