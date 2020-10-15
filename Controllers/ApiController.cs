@@ -1,6 +1,8 @@
 using System;
+using System.Globalization;
 using System.Net.Mime;
 using System.Threading.Tasks;
+using Google.Apis.Util;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,17 +20,46 @@ namespace WeatherLink.Controllers
         }
 
         // GET
+        [Route("")]
+        [Route("Home")]
+        [Route("Home/Index")]
         public IActionResult Index()
         {
             return View();
         }
 
-        // Get
-        [HttpGet]
-        [Route("Estaciones")]
-        public IActionResult Estaciones()
+        // Metodo que se ejecuta cuando se quiere extraer todas las estaciones
+        [Route("Estaciones/{id:int}")]
+        public async Task<IActionResult> Estaciones()
         {
-            return View();
+            return Ok(new
+            {
+                status = StatusCode(StatusCodes.Status200OK).StatusCode,
+                data = await _apiDbContext.Estaciones.ToListAsync()
+            });
+        }
+
+        // Metodo que se ejecuta cuando se quiere extraer todas las estaciones
+        [HttpGet]
+        [Route("Estacion")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Estacion(int id)
+        {
+            if (double.IsNaN(id))
+            {
+                return Json(new
+                {
+                    status = StatusCode(StatusCodes.Status400BadRequest).StatusCode,
+                    message = "El Id tiene que ser valido y es un parametro requerido."
+                });
+            }
+
+            return Ok(new
+            {
+                status = StatusCode(StatusCodes.Status200OK).StatusCode,
+                data = await _apiDbContext.Estaciones.FindAsync(id)
+            });
         }
 
         // Metodo que se ejecuta cuando se quiere agregar una nueva estacion
@@ -71,7 +102,7 @@ namespace WeatherLink.Controllers
 
             return Ok(new
             {
-                status = StatusCode(StatusCodes.Status200OK).StatusCode,
+                status = StatusCode(StatusCodes.Status201Created).StatusCode,
                 data = await _apiDbContext.Estaciones.ToListAsync()
             });
         }

@@ -20,6 +20,7 @@
       <e p="Properties" t="Include">
         <e p="launchSettings.json" t="Include" />
       </e>
+      <e p="Providers" t="Include" />
       <e p="README.md" t="Include" />
       <e p="Startup.cs" t="Include" />
       <e p="Views" t="Include">
