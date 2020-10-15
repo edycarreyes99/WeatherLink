@@ -45,6 +45,29 @@ namespace WeatherLink.Controllers
         }
 
 
+        // Metodo que se ejecuta cuando se quiere extraer todas las estaciones
+        [Route("Estacion")]
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Estacion(int id)
+        {
+            if (id == 0)
+            {
+                return Json(new
+                {
+                    status = StatusCode(StatusCodes.Status400BadRequest).StatusCode,
+                    message = "El Id tiene que ser valido y es un parametro requerido."
+                });
+            }
+
+            return Ok(new
+            {
+                status = StatusCode(StatusCodes.Status200OK).StatusCode,
+                data = await _apiDbContext.Estaciones.FindAsync(id)
+            });
+        }
+
         
     }
 }
