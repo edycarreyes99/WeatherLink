@@ -13,5 +13,9 @@ namespace WeatherLink.Models
 
         // Propiedad para el longitud de la estacion
         public double Longitude { get; set; }
+
+        public double Temperatura { get; set; }
+
+        public double Humedad { get; set; }
     }
 }

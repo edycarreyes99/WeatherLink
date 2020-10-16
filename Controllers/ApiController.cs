@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using WeatherLink.DBContexts;
 using WeatherLink.Models;
 using WeatherLink.Services;
@@ -51,10 +53,17 @@ namespace WeatherLink.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Estaciones()
         {
+            var estaciones = await _apiDbContext.Estaciones.ToListAsync();
+
+            var weather = new List<object>();
+
+            estaciones.ForEach(async estacion => { weather.Add(_weatherService.ClimaPorEstacion(estacion.Id)); });
+
             return Ok(new
             {
                 status = StatusCode(StatusCodes.Status200OK).StatusCode,
-                data = await _apiDbContext.Estaciones.ToListAsync()
+                data = estaciones,
+                weather
             });
         }
 
@@ -116,6 +125,8 @@ namespace WeatherLink.Controllers
                 }));
             }
 
+            var clima = JObject.FromObject(await _weatherService.ClimaPorLngLat(latitud, longitud));
+
             EstacionesViewModel nuevaEstacion = new EstacionesViewModel();
 
             nuevaEstacion.Name = nombre;
@@ -132,6 +143,10 @@ namespace WeatherLink.Controllers
                 }));
             }
 
+            
+            nuevaEstacion.Humedad = (double) clima["humedad"];
+            nuevaEstacion.Temperatura = (double) clima["temperatura"];
+            
             EstacionesViewModel nuevaEstacionGuardada = _apiDbContext.Estaciones.Add(nuevaEstacion).Entity;
 
             var response = await _apiDbContext.SaveChangesAsync();
@@ -250,15 +265,16 @@ namespace WeatherLink.Controllers
             });
         }
 
+        [AllowAnonymous]
         [HttpGet]
-        [Route("DatosTemperatura")]
+        [Route("ActualizarEstaciones")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> DatosTemperatura()
+        public async Task<IActionResult> ActualizarEstaciones()
         {
-            await _weatherService.DatosDeGraficosGeneralDeTemperatura();
+            await _weatherService.ActualizarEstaciones();
 
-            return Ok();
+            return Ok(new {});
         }
     }
 }

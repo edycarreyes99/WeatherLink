@@ -29,11 +29,30 @@ namespace WeatherLink.Services
         {
             var estacion = _apiDbContext.Estaciones.First(e => e.Id.Equals(id));
             var url =
-                $"http://api.openweathermap.org/data/2.5/forecast?lat={estacion.Latitude}&lon={estacion.Longitude}&appid=7e0e4e6cdce20a9faf2b59da4e37dcc2&units=metric";
+                $"http://api.openweathermap.org/data/2.5/weather?lat={estacion.Latitude}&lon={estacion.Longitude}&appid=7e0e4e6cdce20a9faf2b59da4e37dcc2&units=metric";
 
             var response = await _httpClient.GetAsync(url);
 
-            var jsonResponse = JObject.Parse(response.Content.ToString());
+            var jsonResponse = JObject.Parse(response.Content.ReadAsStringAsync().Result);
+
+
+            return new
+            {
+                id,
+                temperatura = jsonResponse["main"]["temp"],
+                humedad = jsonResponse["main"]["humidity"]
+            };
+        }
+
+        public async Task<object> ClimaPorLngLat(double lat, double lng)
+        {
+            var url =
+                $"http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lng}&appid=7e0e4e6cdce20a9faf2b59da4e37dcc2&units=metric";
+
+            var response = await _httpClient.GetAsync(url);
+
+            var jsonResponse = JObject.Parse(response.Content.ReadAsStringAsync().Result);
+
 
             return new
             {
@@ -81,6 +100,27 @@ namespace WeatherLink.Services
             {
                 data = jsonResponse
             };
+        }
+        
+        public async Task ActualizarEstaciones()
+        {
+            var estaciones = _apiDbContext.Estaciones;
+            if (estaciones.ToList().Count != 0)
+            {
+                estaciones.ToList().ForEach(async estacion =>
+                {
+                    var estacionActualizar = estacion;
+                    var clima = JObject.FromObject(await ClimaPorEstacion(estacion.Id));
+
+                    estacion.Humedad = (double) clima["humedad"];
+
+                    estacion.Temperatura = (double) clima["temperatura"];
+
+                    _apiDbContext.Update(estacionActualizar);
+                });
+            }
+            
+            await _apiDbContext.SaveChangesAsync();
         }
     }
 }

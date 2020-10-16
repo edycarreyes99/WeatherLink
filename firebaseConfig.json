@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "weatherlink",
+  "private_key_id": "07b31c16549cd359f89b3f0684f6c3c067ca201b",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC+jqVqRxQSM4Ys\nle7xtpcD9SWbdkkzGw8MgrO2uqA+B0wx83Vh+6Bd1yz4g4CsgdYpzIdJAZOHQge6\n8Bd1uQ3QP6crdPAHMMTapDieO0v9itFmSFj1E5xZr0k/D/imglVMuPfbYSnl9wG4\n4Y7DTdnJQHXGXljGF4uvx4O6q8x7idPyGU4M+v17cG8INAB3s9uaPUE7b+1HHeos\n7z4HgUG+85Dc1CP+KXoKCsMe0ZMpivjZDjWbzSpEpdjaoJyxQBuJpmnoRdgRS+bf\nCTiDbe+FYISmNYrv0viSr+i+gTkqv52wDJfFS0WuLPZEv/ic+wGv4hBHmOJ64AKj\nG64CT6xtAgMBAAECggEAEWKPPQ2q2AKplGP1CEowJ4H6m98Kf5lrSCkDTCgyDWat\nPdNoQd4eLxS+CBaed/gvRnuTJ7oQ/RXGzpHJk7zXdOJE/J+vDfp8XM9lt13rXJoJ\nHHh8qsm1I0ns+BsB0VZYgbO2yf+CPil7/gn22q+kFaQ5YOjKCmYq7gil5oAQNRou\nHxXB590/0GhtXaeQDbGCLsR2z59hFYkOhECEekon3NlEpIyzTy4fYBh5KHePFfCl\n/WFjiY0ZbStAf6C3GSwboJt7AfTevPBvHRbZrDpL6iKzPcO+WLnxYcV8jGuwk3Ao\nGDOf4WmsKppr0xYG+VQYFSZfUsJjpEPLMS5M52bcqwKBgQDptm+5RatORexpC1G5\nVjF/zT8jx8LkJmIpMdDaxpK8bfsBlYB4qZLZU5mLY+MzF+pdAZQFJTzt+XQVlPzx\nTqHgoOjj6ZakaKUWuyu9/GDaykZjv1jw191B/yUXHAsGG68Bd+mXfpbL5B5F3CjQ\nf9sV0Lmz2b/n79qfPhkA/RGQ4wKBgQDQuqr5G6BHDG+77htgbaikJ/3JShXGkwhi\nIo4M0RhsH49niC2XNBthTlMxZWFSE6JMd/F8egNHPSJ1IB+f2M57yYtdMsiayfEt\ndMaWLc6gxpWqfNVTuQq6EcpRcrQNIrzDPB4mm4rQBF9/m1Z7GNPNjmVosuED4hXh\n/CERMk/ebwKBgB+9CscaUv06ObS6OMr2jZpRgTWWtzzMiaAWh8puFRdJyECa0OuR\n+8NPuxZW5k/V+5nN0RAx0mhu6/jSVtdeWlVrBLWOz0pce67ulC4ky/Jqbcy1+5oZ\ndo6z25Gb2VNnBwkoA6zzH/9oZ0QNde16r4Hy6oUmGQ2iYQonILYlp/EJAoGAAq2y\njfnNx7ugH3BBx64AkQK2XgPmXaL7Y47/9aglQRXymCiGNT+E7m274ZFke1InLgYI\nAknqitp8+7XK0hlNJQeEE1EYg+v9fVDXT4wM78E8oHBzqFxih9q8luj66IQ+md7G\noEY0tNCpjRCoPnImHagrIvnQq2UWVM0Qe5ECt18CgYEA2uEH/RFtzoEPnCcbsqAv\nYmrwJaGrTTcmBkw5ahwMJBSu58FmP0d6MnP0XZaGPyONyeLcqCtssoUESx4zxS/m\n9cbYOzwWu9WTH9Pqs7UpXwlfdO3iHnkVw911awgP7JLvPZ5V6X/0wtK7rmJ/ydC0\nFTnUINkQtnGbhbsbLQhOGl4=\n-----END PRIVATE KEY-----\n",
+  "client_email": "weatherlinkbackend@weatherlink.iam.gserviceaccount.com",
+  "client_id": "107226589690333538160",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/weatherlinkbackend%40weatherlink.iam.gserviceaccount.com"
+}
