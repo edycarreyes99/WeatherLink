@@ -1,3 +1,5 @@
+using System;
+
 namespace WeatherLink.Models
 {
     public class EstacionesViewModel
@@ -17,5 +19,7 @@ namespace WeatherLink.Models
         public double Temperatura { get; set; }
 
         public double Humedad { get; set; }
+
+        public DateTime UpdatedAt { get; set; }
     }
 }

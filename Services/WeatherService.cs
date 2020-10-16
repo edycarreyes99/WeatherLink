@@ -101,7 +101,7 @@ namespace WeatherLink.Services
                 data = jsonResponse
             };
         }
-        
+
         public async Task ActualizarEstaciones()
         {
             var estaciones = _apiDbContext.Estaciones;
@@ -116,10 +116,12 @@ namespace WeatherLink.Services
 
                     estacion.Temperatura = (double) clima["temperatura"];
 
+                    estacionActualizar.UpdatedAt = DateTime.Now;
+
                     _apiDbContext.Update(estacionActualizar);
                 });
             }
-            
+
             await _apiDbContext.SaveChangesAsync();
         }
     }

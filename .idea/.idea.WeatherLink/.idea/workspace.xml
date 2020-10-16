@@ -9,13 +9,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c94a409a-a4a2-4f58-9f41-4f458601b5ba" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Services/UpdaterService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.WeatherLink/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WeatherLink/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WeatherLink/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WeatherLink/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/ApiController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/ApiController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Models/EstacionesViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/EstacionesViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Services/WeatherService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/WeatherService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Startup.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,9 +78,9 @@
         <option value="$PROJECT_DIR$/DBContexts/ApiDbContext.cs" />
         <option value="$PROJECT_DIR$/Interfaces/IWeatherService.cs" />
         <option value="$PROJECT_DIR$/Middlewares/FirebaseJwtMiddleware.cs" />
-        <option value="$PROJECT_DIR$/Models/EstacionesViewModel.cs" />
         <option value="$PROJECT_DIR$/Controllers/ApiController.cs" />
         <option value="$PROJECT_DIR$/Startup.cs" />
+        <option value="$PROJECT_DIR$/Models/EstacionesViewModel.cs" />
         <option value="$PROJECT_DIR$/Services/WeatherService.cs" />
         <option value="$PROJECT_DIR$/Services/UpdaterService.cs" />
       </list>
@@ -150,7 +146,7 @@
       <option name="presentableId" value="Default" />
       <updated>1602368199871</updated>
       <workItem from="1602368208272" duration="5919000" />
-      <workItem from="1602741984193" duration="51397000" />
+      <workItem from="1602741984193" duration="51976000" />
     </task>
     <servers />
   </component>
@@ -179,22 +175,22 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="555" y="215" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1602786855951" />
-    <state width="1878" height="277" key="GridCell.Tab.0.bottom" timestamp="1602844381884">
+    <state width="1878" height="277" key="GridCell.Tab.0.bottom" timestamp="1602844955498">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="277" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1602844381884" />
-    <state width="1878" height="277" key="GridCell.Tab.0.center" timestamp="1602844381884">
+    <state width="1878" height="277" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1602844955498" />
+    <state width="1878" height="277" key="GridCell.Tab.0.center" timestamp="1602844955497">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="277" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1602844381884" />
-    <state width="1878" height="277" key="GridCell.Tab.0.left" timestamp="1602844381884">
+    <state width="1878" height="277" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1602844955497" />
+    <state width="1878" height="277" key="GridCell.Tab.0.left" timestamp="1602844955497">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="277" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1602844381884" />
-    <state width="1878" height="277" key="GridCell.Tab.0.right" timestamp="1602844381884">
+    <state width="1878" height="277" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1602844955497" />
+    <state width="1878" height="277" key="GridCell.Tab.0.right" timestamp="1602844955497">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="277" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1602844381884" />
+    <state width="1878" height="277" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1602844955497" />
     <state width="1878" height="342" key="GridCell.Tab.1.bottom" timestamp="1602837146773">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
