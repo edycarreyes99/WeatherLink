@@ -1,12 +1,17 @@
+using System.Security.Principal;
+using System.Threading.Tasks;
+using FirebaseAdmin.Auth;
 using WeatherLink.Interfaces;
 
 namespace WeatherLink.Services
 {
     public class AuthService : IAuthService
     {
-        public bool CheckJwt(string jwt)
+        public async Task<string> CheckJwt(string jwt)
         {
-            throw new System.NotImplementedException();
+            FirebaseToken decodedToken = await FirebaseAuth.DefaultInstance
+                .VerifyIdTokenAsync(jwt);
+            return decodedToken.Uid;
         }
     }
 }

@@ -1,10 +1,8 @@
 using System;
 using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
-using System.Net.Mime;
 using System.Threading.Tasks;
-using Google.Apis.Util;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,16 +10,18 @@ using WeatherLink.Models;
 
 namespace WeatherLink.Controllers
 {
+    [Authorize]
     public class ApiController : Controller
     {
         private readonly ApiDbContext _apiDbContext;
-
+        
         public ApiController(ApiDbContext apiDbContext)
         {
             _apiDbContext = apiDbContext;
         }
 
         // Ruta principal de la aplicacion
+        [AllowAnonymous]
         [Route("")]
         [Route("Api")]
         [Route("Api/Index")]

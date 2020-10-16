@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -9,7 +10,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WeatherLink.Interfaces;
+using WeatherLink.Middlewares;
 using WeatherLink.Models;
+using WeatherLink.Services;
 
 namespace WeatherLink
 {
@@ -25,10 +29,18 @@ namespace WeatherLink
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             // Se añade el contexto de la base de datos a los servicios generales de la aplicacion y se inicializa
             services.AddDbContext<ApiDbContext>(options =>
                 options.UseMySql(Configuration["WeatherLink:MYSQL_CONNECTION_STRING"]));
+            
+            // configure basic authentication 
+            services.AddAuthentication("BasicAuthentication")
+                .AddScheme<AuthenticationSchemeOptions, FirebaseJwtMiddleware>("BasicAuthentication", null);
 
+            // se configura el DI para la aplicacion de servicios
+            services.AddScoped<IAuthService, AuthService>();
+            
             services.AddControllersWithViews();
         }
 
@@ -50,7 +62,14 @@ namespace WeatherLink
             app.UseStaticFiles();
 
             app.UseRouting();
+            
+            // politica de cors global
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

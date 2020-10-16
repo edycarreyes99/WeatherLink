@@ -9,9 +9,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c94a409a-a4a2-4f58-9f41-4f458601b5ba" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Interfaces/IAuthService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Services/AuthService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Middlewares/FirebaseJwtMiddleware.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WeatherLink/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WeatherLink/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.WeatherLink/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WeatherLink/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/ApiController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/ApiController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Interfaces/IAuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Interfaces/IAuthService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/AuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/AuthService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Startup.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WeatherLink.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WeatherLink.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -30,14 +34,18 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/AEEA0A49-4DB9-4564-AF1C-B19E66A3E4B3/13/DeveloperExceptionPageExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/366E8AE0-1B9B-4017-9558-D9119070DE22/B/RazorPage.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4D551016-FCE3-4DE6-9D94-341E475D9896/84/4c37c152/AbstractFirebaseAuth.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1566B945-F911-4360-B501-5ADA4E22F19D/D/RazorPageBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/08BEEF07-8B27-4C9B-9B70-7BF7F188D920/9/EntityFrameworkServiceCollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/366E8AE0-1B9B-4017-9558-D9119070DE22/D/RazorPageBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/08BEEF07-8B27-4C9B-9B70-7BF7F188D920/12/DbSet.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/39C59077-AD03-4E0B-85B4-BCBBBBC91581/7/IHtmlContent.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1566B945-F911-4360-B501-5ADA4E22F19D/B/RazorPage.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/000CBD59-71DC-4C3E-9147-6CE84422B02B/9/HtmlEncoder.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B4EA629E-BF1F-4A19-A84C-1A5842455249/a8/f3e9c99e/MySqlPropertyBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/DECA2892-F1B5-4253-A0AE-D0E9884F4605/99/AuthenticationHeaderValue.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/D15D6B5C-4E78-4B38-9A50-13792994B8B2/7/AuthenticationTicket.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/D15D6B5C-4E78-4B38-9A50-13792994B8B2/1/AuthenticateResult.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1566B945-F911-4360-B501-5ADA4E22F19D/B/RazorPage.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -56,11 +64,12 @@
         <option value="$PROJECT_DIR$/Models/EstacionesViewModel.cs" />
         <option value="$PROJECT_DIR$/Views/Api/Estaciones.cshtml" />
         <option value="$PROJECT_DIR$/Controllers/HomeController.cs" />
-        <option value="$PROJECT_DIR$/Controllers/ApiController.cs" />
-        <option value="$PROJECT_DIR$/Startup.cs" />
         <option value="$PROJECT_DIR$/IAuthService.cs" />
         <option value="$PROJECT_DIR$/Interfaces/IAuthService.cs" />
         <option value="$PROJECT_DIR$/Services/AuthService.cs" />
+        <option value="$PROJECT_DIR$/Startup.cs" />
+        <option value="$PROJECT_DIR$/Middlewares/FirebaseJwtMiddleware.cs" />
+        <option value="$PROJECT_DIR$/Controllers/ApiController.cs" />
       </list>
     </option>
   </component>
@@ -124,7 +133,7 @@
       <option name="presentableId" value="Default" />
       <updated>1602368199871</updated>
       <workItem from="1602368208272" duration="5919000" />
-      <workItem from="1602741984193" duration="21443000" />
+      <workItem from="1602741984193" duration="25999000" />
     </task>
     <servers />
   </component>
@@ -153,25 +162,37 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="555" y="215" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1602786855951" />
-    <state width="1878" height="277" key="GridCell.Tab.0.bottom" timestamp="1602806440732">
+    <state width="1878" height="277" key="GridCell.Tab.0.bottom" timestamp="1602812209116">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="277" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1602806440732" />
-    <state width="1878" height="277" key="GridCell.Tab.0.center" timestamp="1602806440732">
+    <state width="1878" height="277" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1602812209116" />
+    <state width="1878" height="277" key="GridCell.Tab.0.center" timestamp="1602812209116">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="277" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1602806440732" />
-    <state width="1878" height="277" key="GridCell.Tab.0.left" timestamp="1602806440731">
+    <state width="1878" height="277" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1602812209116" />
+    <state width="1878" height="277" key="GridCell.Tab.0.left" timestamp="1602812209115">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="277" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1602806440731" />
-    <state width="1878" height="277" key="GridCell.Tab.0.right" timestamp="1602806440732">
+    <state width="1878" height="277" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1602812209115" />
+    <state width="1878" height="277" key="GridCell.Tab.0.right" timestamp="1602812209116">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="277" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1602806440732" />
+    <state width="1878" height="277" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1602812209116" />
     <state width="224" height="477" key="HiddenNamespacesPopup" timestamp="1602786865479">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="224" height="477" key="HiddenNamespacesPopup/0.27.1920.1053@0.27.1920.1053" timestamp="1602786865479" />
+    <state x="100" y="127" width="1720" height="853" key="VCS.FileHistoryDialog" timestamp="1602811582532">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="100" y="127" width="1720" height="853" key="VCS.FileHistoryDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1602811582532" />
+    <state x="624" y="252" key="run.anything.popup" timestamp="1602809843408">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="624" y="252" key="run.anything.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1602809843408" />
+    <state x="623" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1602810708421">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="623" y="259" width="672" height="678" key="search.everywhere.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1602810708421" />
   </component>
 </project>

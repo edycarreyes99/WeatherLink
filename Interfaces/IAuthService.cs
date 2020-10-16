@@ -1,7 +1,9 @@
+using System.Threading.Tasks;
+
 namespace WeatherLink.Interfaces
 {
     public interface IAuthService
     {
-        bool CheckJwt(string jwt);
+        Task<string> CheckJwt(string jwt);
     }
 }
