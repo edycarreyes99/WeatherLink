@@ -1,18 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WeatherLink.DBContexts;
 using WeatherLink.Interfaces;
 using WeatherLink.Middlewares;
-using WeatherLink.Models;
 using WeatherLink.Services;
 
 namespace WeatherLink
@@ -22,6 +20,10 @@ namespace WeatherLink
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            FirebaseApp.Create(new AppOptions()
+            {
+                Credential = GoogleCredential.FromFile("firebaseConfig.json")
+            });
         }
 
         public IConfiguration Configuration { get; }
@@ -35,12 +37,12 @@ namespace WeatherLink
                 options.UseMySql(Configuration["WeatherLink:MYSQL_CONNECTION_STRING"]));
             
             // configure basic authentication 
-            services.AddAuthentication("BasicAuthentication")
-                .AddScheme<AuthenticationSchemeOptions, FirebaseJwtMiddleware>("BasicAuthentication", null);
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddScheme<AuthenticationSchemeOptions, FirebaseJwtMiddleware>(JwtBearerDefaults.AuthenticationScheme, null);
 
             // se configura el DI para la aplicacion de servicios
             services.AddScoped<IAuthService, AuthService>();
-            
+
             services.AddControllersWithViews();
         }
 

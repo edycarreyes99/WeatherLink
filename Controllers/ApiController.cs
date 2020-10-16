@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WeatherLink.DBContexts;
 using WeatherLink.Models;
+using WeatherLink.Services;
 
 namespace WeatherLink.Controllers
 {
@@ -14,10 +16,12 @@ namespace WeatherLink.Controllers
     public class ApiController : Controller
     {
         private readonly ApiDbContext _apiDbContext;
-        
+        private readonly WeatherService _weatherService;
+
         public ApiController(ApiDbContext apiDbContext)
         {
             _apiDbContext = apiDbContext;
+            _weatherService = new WeatherService(_apiDbContext);
         }
 
         // Ruta principal de la aplicacion
@@ -30,7 +34,7 @@ namespace WeatherLink.Controllers
         {
             return View();
         }
-        
+
         [Route("Api/Error")]
         [Route("Error")]
         [HttpGet]
@@ -227,7 +231,16 @@ namespace WeatherLink.Controllers
 
             EstacionesViewModel estacionEliminar = _apiDbContext.Estaciones.First(e => e.Id.Equals(id));
 
-            _apiDbContext.Remove(estacionEliminar);
+            try
+            {
+                _apiDbContext.Remove(estacionEliminar);
+
+                _apiDbContext.SaveChangesAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error al eliminar la estacion");
+            }
 
             return Ok(new
             {
@@ -235,6 +248,17 @@ namespace WeatherLink.Controllers
                 message = $"La estacion con el id {id} se ha eliminado correctamente.",
                 data = estacionEliminar
             });
+        }
+
+        [HttpGet]
+        [Route("DatosTemperatura")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> DatosTemperatura()
+        {
+            await _weatherService.DatosDeGraficosGeneralDeTemperatura();
+
+            return Ok();
         }
     }
 }

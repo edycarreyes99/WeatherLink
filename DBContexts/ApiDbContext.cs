@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using WeatherLink.Models;
 
-namespace WeatherLink.Models
+namespace WeatherLink.DBContexts
 {
     public class ApiDbContext : DbContext
     {

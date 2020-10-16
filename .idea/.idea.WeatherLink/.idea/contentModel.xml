@@ -13,6 +13,7 @@
       </e>
       <e p="Interfaces" t="Include">
         <e p="IAuthService.cs" t="Include" />
+        <e p="IWeatherService.cs" t="Include" />
       </e>
       <e p="Middlewares" t="Include">
         <e p="FirebaseJwtMiddleware.cs" t="Include" />
@@ -28,6 +29,7 @@
       <e p="README.md" t="Include" />
       <e p="Services" t="Include">
         <e p="AuthService.cs" t="Include" />
+        <e p="WeatherService.cs" t="Include" />
       </e>
       <e p="Startup.cs" t="Include" />
       <e p="Views" t="Include">
@@ -49,6 +51,7 @@
       <e p="appsettings.Development.json" t="Include" />
       <e p="appsettings.json" t="Include" />
       <e p="bin" t="ExcludeRecursive" />
+      <e p="firebaseConfig.json" t="Include" />
       <e p="obj" t="ExcludeRecursive">
         <e p="Debug" t="Include">
           <e p="netcoreapp3.1" t="Include">

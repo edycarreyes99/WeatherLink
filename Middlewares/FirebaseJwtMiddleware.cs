@@ -41,9 +41,8 @@ namespace WeatherLink.Middlewares
             string jwt;
             try
             {
-                var authHeader = AuthenticationHeaderValue.Parse(Request.Headers["Authorization"]);
-                var credentialBytes = Convert.FromBase64String(authHeader.Parameter);
-                jwt = Encoding.UTF8.GetString(credentialBytes).Replace("Bearer ", "");
+                var authHeader = Request.Headers["Authorization"];
+                jwt = authHeader.ToString().Replace("Bearer ", "");
                 jwtCorrecto = await _authService.CheckJwt(jwt);
             }
             catch
