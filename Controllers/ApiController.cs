@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Net.Mime;
@@ -22,12 +23,21 @@ namespace WeatherLink.Controllers
 
         // Ruta principal de la aplicacion
         [Route("")]
-        [Route("Home")]
-        [Route("Home/Index")]
+        [Route("Api")]
+        [Route("Api/Index")]
         [HttpGet]
         public IActionResult Index()
         {
             return View();
+        }
+        
+        [Route("Api/Error")]
+        [Route("Error")]
+        [HttpGet]
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
         }
 
         // Metodo que se ejecuta cuando se quiere extraer todas las estaciones

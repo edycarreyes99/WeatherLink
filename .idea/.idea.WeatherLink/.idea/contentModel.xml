@@ -7,7 +7,6 @@
       <e p=".gitignore" t="Include" />
       <e p="Controllers" t="Include">
         <e p="ApiController.cs" t="Include" />
-        <e p="HomeController.cs" t="Include" />
       </e>
       <e p="DBContexts" t="Include">
         <e p="ApiDbContext.cs" t="Include" />
@@ -28,10 +27,6 @@
           <e p="AgregarEstacion.cshtml" t="Include" />
           <e p="Estaciones.cshtml" t="Include" />
           <e p="Index.cshtml" t="Include" />
-        </e>
-        <e p="Home" t="Include">
-          <e p="Index.cshtml" t="Include" />
-          <e p="Privacy.cshtml" t="Include" />
         </e>
         <e p="Shared" t="Include">
           <e p="Error.cshtml" t="Include" />
