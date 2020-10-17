@@ -16,8 +16,10 @@ namespace WeatherLink.Middlewares
 {
     public class FirebaseJwtMiddleware : AuthenticationHandler<AuthenticationSchemeOptions>
     {
+        // Variables globales a utilizarse
         private readonly AuthService _authService = new AuthService();
 
+        // Constructor del middleware
         public FirebaseJwtMiddleware(
             IOptionsMonitor<AuthenticationSchemeOptions> options,
             ILoggerFactory logger,
@@ -27,22 +29,27 @@ namespace WeatherLink.Middlewares
         {
         }
 
+        // Metodo que se ejecuta cada vez que se realiza una peticion al servidor
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {
-            // skip authentication if endpoint has [AllowAnonymous] attribute
+            // Se omite la validacion si el endpoint o controladdor posee el atributo [AllowAnonymous]
             var endpoint = Context.GetEndpoint();
             if (endpoint?.Metadata?.GetMetadata<IAllowAnonymous>() != null)
                 return AuthenticateResult.NoResult();
 
+            // Se verifica que la peticion contenga el header de autorizacion
             if (!Request.Headers.ContainsKey("Authorization"))
                 return AuthenticateResult.Fail("No se encuentra el header de 'Authorization'.");
 
             String jwtCorrecto;
             string jwt;
+
             try
             {
                 var authHeader = Request.Headers["Authorization"];
                 jwt = authHeader.ToString().Replace("Bearer ", "");
+
+                // Se invoca al metodo de verificacion del jwt
                 jwtCorrecto = await _authService.CheckJwt(jwt);
             }
             catch
@@ -50,6 +57,7 @@ namespace WeatherLink.Middlewares
                 return AuthenticateResult.Fail("El valor del 'Authorization' ingresado no es valido.");
             }
 
+            // Se verifica que el jwt le pertenezca a un usuario
             if (jwtCorrecto == null)
                 return AuthenticateResult.Fail(
                     "Los valores de authorizacion ingresados no corresponden a ningun usuario.");
@@ -63,6 +71,7 @@ namespace WeatherLink.Middlewares
             var claimsPrincipal = new ClaimsPrincipal(identidadClaims);
             var authenticationTicket = new AuthenticationTicket(claimsPrincipal, Scheme.Name);
 
+            // Se retorna la autenticacion correcta
             return AuthenticateResult.Success(authenticationTicket);
         }
     }

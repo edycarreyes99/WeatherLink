@@ -9,9 +9,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c94a409a-a4a2-4f58-9f41-4f458601b5ba" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.WeatherLink/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WeatherLink/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Interfaces/IWeatherService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Interfaces/IWeatherService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/WeatherService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/WeatherService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middlewares/FirebaseJwtMiddleware.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/FirebaseJwtMiddleware.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +75,6 @@
         <option value="$PROJECT_DIR$/Interfaces/IAuthService.cs" />
         <option value="$PROJECT_DIR$/DBContexts/ApiDbContext.cs" />
         <option value="$PROJECT_DIR$/Interfaces/IWeatherService.cs" />
-        <option value="$PROJECT_DIR$/Middlewares/FirebaseJwtMiddleware.cs" />
         <option value="$PROJECT_DIR$/Models/EstacionesViewModel.cs" />
         <option value="$PROJECT_DIR$/InputFormatters/RawjsonBodyInputFormatter.cs" />
         <option value="$PROJECT_DIR$/Controllers/ApiController.cs" />
@@ -86,6 +83,7 @@
         <option value="$PROJECT_DIR$/Services/AuthService.cs" />
         <option value="$PROJECT_DIR$/Services/UpdaterService.cs" />
         <option value="$PROJECT_DIR$/Services/WeatherService.cs" />
+        <option value="$PROJECT_DIR$/Middlewares/FirebaseJwtMiddleware.cs" />
       </list>
     </option>
   </component>
