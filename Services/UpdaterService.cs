@@ -15,22 +15,24 @@ namespace WeatherLink.Services
 {
     public class UpdaterService : IHostedService
     {
+        // Variables globales a utilizarse
         private readonly ILogger<UpdaterService> _logger;
-        private ApiDbContext _apiDbContext;
         private WeatherService _weatherService;
 
-        // inject a logger
+        // Constructor del servicio
         public UpdaterService(ILogger<UpdaterService> logger, ApiDbContext apiDbContext)
         {
+            // Se inicializan las variables
             _logger = logger;
-            _apiDbContext = apiDbContext;
-            _weatherService = new WeatherService(_apiDbContext);
+            _weatherService = new WeatherService(apiDbContext);
         }
 
+        // Metodo que se ejecuta al invocar al servicio
         public Task StartAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Hosted service starting");
-            var estacion = _apiDbContext.Estaciones.First();
+
+            // Se retorna el thread que se ejecutara cada 5 minutos
             return Task.Factory.StartNew(async () =>
             {
                 // loop until a cancalation is requested
@@ -39,7 +41,7 @@ namespace WeatherLink.Services
                     Console.WriteLine($"Hosted service executing - {DateTime.Now}");
                     try
                     {
-                        // wait for 3 seconds
+                        // Se invoca al metodo que actualiza la informacion meteorologica de las estaciones en la base de datos
                         await _weatherService.ActualizarEstaciones();
                         await Task.Delay(TimeSpan.FromMinutes(5), cancellationToken);
                     }
@@ -50,6 +52,7 @@ namespace WeatherLink.Services
             }, cancellationToken);
         }
 
+        // Metodo que detiene el thread
         public Task StopAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Hosted service stopping");
