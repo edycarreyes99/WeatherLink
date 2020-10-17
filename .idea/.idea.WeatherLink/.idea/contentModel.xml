@@ -11,6 +11,9 @@
       <e p="DBContexts" t="Include">
         <e p="ApiDbContext.cs" t="Include" />
       </e>
+      <e p="InputFormatters" t="Include">
+        <e p="RawjsonBodyInputFormatter.cs" t="Include" />
+      </e>
       <e p="Interfaces" t="Include">
         <e p="IAuthService.cs" t="Include" />
         <e p="IWeatherService.cs" t="Include" />

@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using WeatherLink.DBContexts;
+using WeatherLink.InputFormatters;
 using WeatherLink.Interfaces;
 using WeatherLink.Middlewares;
 using WeatherLink.Services;
@@ -74,6 +75,9 @@ namespace WeatherLink
             services.AddSingleton<IHostedService>(new UpdaterService(new Logger<UpdaterService>(new LoggerFactory()),
                 new ApiDbContext(new DbContextOptionsBuilder<ApiDbContext>()
                     .UseMySql(Configuration["WeatherLink:MYSQL_CONNECTION_STRING"]).Options)));
+
+            // Se añade el formateador para aceptar peticiones con json
+            services.AddMvc(options => { options.InputFormatters.Insert(0, new RawJsonBodyInputFormatter()); });
 
             services.AddControllersWithViews();
         }

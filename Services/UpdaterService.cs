@@ -36,7 +36,7 @@ namespace WeatherLink.Services
                 // loop until a cancalation is requested
                 while (!cancellationToken.IsCancellationRequested)
                 {
-                    Console.WriteLine($"Hosted service executing - {DateTime.Now}, {estacion.Name}");
+                    Console.WriteLine($"Hosted service executing - {DateTime.Now}");
                     try
                     {
                         // wait for 3 seconds

@@ -88,9 +88,10 @@ namespace WeatherLink.Controllers
         [Route("AgregarEstacion")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> AgregarEstacion(string nombre, double latitud, double longitud)
+        public async Task<IActionResult> AgregarEstacion([FromBody] string body)
         {
-            if (string.IsNullOrEmpty(nombre))
+            var data = JObject.Parse(body);
+            if (string.IsNullOrEmpty(data["nombre"].ToString()))
             {
                 return Json(new
                 {
@@ -99,7 +100,7 @@ namespace WeatherLink.Controllers
                 });
             }
 
-            if (double.IsNaN(latitud) || latitud == 0)
+            if (double.IsNaN(double.Parse(data["latitud"].ToString())) || double.Parse(data["latitud"].ToString()) == 0)
             {
                 return BadRequest(Json(new
                 {
@@ -108,7 +109,8 @@ namespace WeatherLink.Controllers
                 }));
             }
 
-            if (double.IsNaN(longitud) || longitud == 0)
+            if (double.IsNaN(double.Parse(data["longitud"].ToString())) ||
+                double.Parse(data["longitud"].ToString()) == 0)
             {
                 return BadRequest(Json(new
                 {
@@ -117,15 +119,19 @@ namespace WeatherLink.Controllers
                 }));
             }
 
-            var clima = JObject.FromObject(await _weatherService.ClimaPorLngLat(latitud, longitud));
+            Console.WriteLine($"{data["nombre"]} {data["latitud"]} {data["longitud"]}");
+
+            var clima = JObject.FromObject(await _weatherService.ClimaPorLngLat(
+                double.Parse(data["latitud"].ToString()), double.Parse(data["longitud"].ToString())));
 
             EstacionesViewModel nuevaEstacion = new EstacionesViewModel();
 
-            nuevaEstacion.Name = nombre;
-            nuevaEstacion.Latitude = latitud;
-            nuevaEstacion.Longitude = longitud;
+            nuevaEstacion.Name = data["nombre"].ToString();
+            nuevaEstacion.Latitude = double.Parse(data["latitud"].ToString());
+            nuevaEstacion.Longitude = double.Parse(data["longitud"].ToString());
 
-            if (_apiDbContext.Estaciones.Where(e => e.Name.Trim().ToLower().Equals(nombre.Trim().ToLower())).ToList()
+            if (_apiDbContext.Estaciones
+                .Where(e => e.Name.Trim().ToLower().Equals(data["nombre"].ToString().Trim().ToLower())).ToList()
                 .Count > 0)
             {
                 return BadRequest(Json(new
@@ -138,6 +144,7 @@ namespace WeatherLink.Controllers
 
             nuevaEstacion.Humedad = (double) clima["humedad"];
             nuevaEstacion.Temperatura = (double) clima["temperatura"];
+            nuevaEstacion.UpdatedAt = DateTime.Now;
 
             EstacionesViewModel nuevaEstacionGuardada = _apiDbContext.Estaciones.Add(nuevaEstacion).Entity;
 
@@ -167,8 +174,13 @@ namespace WeatherLink.Controllers
         [Route("ActualizarEstacion")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> ActualizarEstacion(int id, string nombre)
+        public async Task<IActionResult> ActualizarEstacion([FromBody] string body)
         {
+            var json = JObject.Parse(body);
+            var nombre = json["nombre"].ToString();
+            var id = 0;
+            int.TryParse(json["id"].ToString(), out id);
+
             if (string.IsNullOrEmpty(nombre))
             {
                 return Json(new
@@ -216,8 +228,11 @@ namespace WeatherLink.Controllers
         [Route("EliminarEstacion")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult EliminarEstacion(int id)
+        public IActionResult EliminarEstacion([FromBody] string body)
         {
+            var data = JObject.Parse(body);
+            var id = 0;
+            int.TryParse(data["id"].ToString(), out id);
             if (id == 0)
             {
                 return Json(new
