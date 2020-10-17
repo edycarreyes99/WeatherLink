@@ -9,11 +9,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c94a409a-a4a2-4f58-9f41-4f458601b5ba" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/InputFormatters/RawjsonBodyInputFormatter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.WeatherLink/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WeatherLink/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.WeatherLink/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WeatherLink/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/ApiController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/ApiController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/UpdaterService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/UpdaterService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Startup.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -87,8 +82,8 @@
         <option value="$PROJECT_DIR$/Services/WeatherService.cs" />
         <option value="$PROJECT_DIR$/Services/UpdaterService.cs" />
         <option value="$PROJECT_DIR$/InputFormatters/RawjsonBodyInputFormatter.cs" />
-        <option value="$PROJECT_DIR$/Startup.cs" />
         <option value="$PROJECT_DIR$/Controllers/ApiController.cs" />
+        <option value="$PROJECT_DIR$/Startup.cs" />
       </list>
     </option>
   </component>

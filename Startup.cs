@@ -1,8 +1,5 @@
-using System;
-using System.Threading.Tasks;
 using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
-using Google.Apis.Http;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -24,33 +21,12 @@ namespace WeatherLink
     {
         public Startup(IConfiguration configuration)
         {
+            // Se inicializa la plataforma de firebase en el proyecto
             Configuration = configuration;
             FirebaseApp.Create(new AppOptions()
             {
                 Credential = GoogleCredential.FromFile("firebaseConfig.json")
             });
-        }
-
-        // Metodo para crear el Thread de que actualice el contenido de las estaciones cada 5 minutos
-        private void HiloParaEstaciones()
-        {
-            var startTimeSpan = TimeSpan.Zero;
-            var periodTimeSpan = TimeSpan.FromSeconds(5);
-
-            var timer = new System.Threading.Timer(async (e) =>
-            {
-                /*var httpClient =
-                    new HttpClientFactory().CreateHttpClient(new CreateHttpClientArgs());
-
-                var url =
-                    $"https://localhost:5001/ActualizarEstaciones/";
-
-                var response = await httpClient.GetAsync(url);
-
-                Console.WriteLine(response.Content.ReadAsStringAsync().Result);*/
-
-                Console.WriteLine("Hilo comenzado");
-            }, null, startTimeSpan, periodTimeSpan);
         }
 
         public IConfiguration Configuration { get; }
@@ -59,19 +35,21 @@ namespace WeatherLink
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
+
             // Se añade el contexto de la base de datos a los servicios generales de la aplicacion y se inicializa
             services.AddDbContext<ApiDbContext>(options =>
                 options.UseMySql(Configuration["WeatherLink:MYSQL_CONNECTION_STRING"]));
 
-            // configure basic authentication 
+            // Configuracion para la autenticacion basica mediante JWT 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddScheme<AuthenticationSchemeOptions, FirebaseJwtMiddleware>(JwtBearerDefaults.AuthenticationScheme,
                     null);
 
-            // se configura el DI para la aplicacion de servicios
+            // Se configura el DI para la aplicacion de servicios
             services.AddScoped<IAuthService, AuthService>();
 
 
+            // Se añade el servicio de background para el THREAD para extraer y actualizar la informacion meteoroligica de cada estacion cada 5 minutos
             services.AddSingleton<IHostedService>(new UpdaterService(new Logger<UpdaterService>(new LoggerFactory()),
                 new ApiDbContext(new DbContextOptionsBuilder<ApiDbContext>()
                     .UseMySql(Configuration["WeatherLink:MYSQL_CONNECTION_STRING"]).Options)));
@@ -115,8 +93,6 @@ namespace WeatherLink
                 // Ruta para extraer una sola estacion
                 endpoints.MapControllers();
             });
-
-            // HiloParaEstaciones();
         }
     }
 }
