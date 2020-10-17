@@ -38,8 +38,6 @@
       <e p="Startup.cs" t="Include" />
       <e p="Views" t="Include">
         <e p="Api" t="Include">
-          <e p="AgregarEstacion.cshtml" t="Include" />
-          <e p="Estaciones.cshtml" t="Include" />
           <e p="Index.cshtml" t="Include" />
         </e>
         <e p="Shared" t="Include">
