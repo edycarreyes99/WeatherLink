@@ -9,5 +9,9 @@ namespace WeatherLink.Interfaces
         Task<object> ClimaPorEstacion(int id);
 
         Task<object> GenerarDatosParaGraficoDeTemperatura();
+        
+        Task<object> ClimaPorLngLat(double lat, double lng);
+
+        Task ActualizarEstaciones();
     }
 }
