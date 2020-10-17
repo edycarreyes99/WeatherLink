@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -53,17 +52,10 @@ namespace WeatherLink.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Estaciones()
         {
-            var estaciones = await _apiDbContext.Estaciones.ToListAsync();
-
-            var weather = new List<object>();
-
-            estaciones.ForEach(async estacion => { weather.Add(_weatherService.ClimaPorEstacion(estacion.Id)); });
-
             return Ok(new
             {
-                status = StatusCode(StatusCodes.Status200OK).StatusCode,
-                data = estaciones,
-                weather
+                status = StatusCode(StatusCodes.Status200OK),
+                data = await _apiDbContext.Estaciones.ToListAsync()
             });
         }
 
@@ -143,10 +135,10 @@ namespace WeatherLink.Controllers
                 }));
             }
 
-            
+
             nuevaEstacion.Humedad = (double) clima["humedad"];
             nuevaEstacion.Temperatura = (double) clima["temperatura"];
-            
+
             EstacionesViewModel nuevaEstacionGuardada = _apiDbContext.Estaciones.Add(nuevaEstacion).Entity;
 
             var response = await _apiDbContext.SaveChangesAsync();
@@ -274,7 +266,7 @@ namespace WeatherLink.Controllers
         {
             await _weatherService.ActualizarEstaciones();
 
-            return Ok(new {});
+            return Ok(new { });
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Google.Apis.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using Newtonsoft.Json.Linq;
 using WeatherLink.DBContexts;
@@ -104,25 +105,26 @@ namespace WeatherLink.Services
 
         public async Task ActualizarEstaciones()
         {
-            var estaciones = _apiDbContext.Estaciones;
-            if (estaciones.ToList().Count != 0)
+            var estaciones = await _apiDbContext.Estaciones.ToListAsync();
+
+            if (estaciones.Count != 0)
             {
-                estaciones.ToList().ForEach(async estacion =>
+                foreach (var estacion in estaciones)
                 {
-                    var estacionActualizar = estacion;
                     var clima = JObject.FromObject(await ClimaPorEstacion(estacion.Id));
 
                     estacion.Humedad = (double) clima["humedad"];
 
                     estacion.Temperatura = (double) clima["temperatura"];
 
-                    estacionActualizar.UpdatedAt = DateTime.Now;
+                    Console.WriteLine(
+                        $"Estacion {estacion.Name}: Humedad={clima["humedad"]} Temperatura={clima["temperatura"]} actualizacion={DateTime.Now}");
 
-                    _apiDbContext.Update(estacionActualizar);
-                });
+                    estacion.UpdatedAt = DateTime.Now;
+                }
+
+                await _apiDbContext.SaveChangesAsync();
             }
-
-            await _apiDbContext.SaveChangesAsync();
         }
     }
 }
