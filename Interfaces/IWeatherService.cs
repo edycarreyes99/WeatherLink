@@ -8,6 +8,6 @@ namespace WeatherLink.Interfaces
     {
         Task<object> ClimaPorEstacion(int id);
 
-        Task<object> DatosDeGraficosGeneralDeTemperatura();
+        Task<object> GenerarDatosParaGraficoDeTemperatura();
     }
 }
