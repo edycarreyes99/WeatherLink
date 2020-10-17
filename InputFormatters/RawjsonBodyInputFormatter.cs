@@ -9,7 +9,7 @@ namespace WeatherLink.InputFormatters
     {
         public RawJsonBodyInputFormatter()
         {
-            this.SupportedMediaTypes.Add("application/json");
+            SupportedMediaTypes.Add("application/json");
         }
 
         public override async Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context)
