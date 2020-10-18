@@ -36,6 +36,7 @@ namespace WeatherLink.Controllers
             return View();
         }
 
+        // En caso de error
         [Route("Api/Error")]
         [Route("Error")]
         [HttpGet]
@@ -257,7 +258,7 @@ namespace WeatherLink.Controllers
             {
                 _apiDbContext.Remove(estacionEliminar);
 
-                _apiDbContext.SaveChangesAsync();
+                _apiDbContext.SaveChanges();
             }
             catch
             {
@@ -271,17 +272,27 @@ namespace WeatherLink.Controllers
                 data = estacionEliminar
             });
         }
-
-        [AllowAnonymous]
+        
         [HttpGet]
         [Route("ActualizarEstaciones")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> ActualizarEstaciones()
         {
             await _weatherService.ActualizarEstaciones();
 
             return Ok(new { });
+        }
+
+        [HttpGet]
+        [Route("GenerarDatosParaGraficos")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> GenerarDatosParaGraficos()
+        {
+            return Ok(new
+            {
+                status = StatusCode(StatusCodes.Status200OK),
+                data = await _weatherService.GenerarDatosParaGraficos()
+            });
         }
     }
 }
