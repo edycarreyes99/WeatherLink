@@ -36,6 +36,7 @@ namespace WeatherLink.Controllers
             return View();
         }
 
+        // En caso de error
         [Route("Api/Error")]
         [Route("Error")]
         [HttpGet]
