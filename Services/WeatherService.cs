@@ -93,9 +93,8 @@ namespace WeatherLink.Services
             };
         }
 
-        // ToDo Terminar la implementacion del metodo
-        // Metodo que se ejecuta en la paticion para generar los datos del graficos de temperatura
-        public async Task<object> GenerarDatosParaGraficoDeTemperatura()
+        // Metodo que se ejecuta en la paticion para generar los datos del graficos de temperatura y humedad
+        public async Task<object> GenerarDatosParaGraficos()
         {
             // Se extraen todas las estaciones de la base de datos y se guardan en una variable
             var estaciones = await _apiDbContext.Estaciones.ToListAsync();
@@ -104,7 +103,8 @@ namespace WeatherLink.Services
             if (estaciones.Count != 0)
             {
                 // Variables a utilizarse
-                var series = new List<Dictionary<string, object>>();
+                var seriesTemperatura = new List<Dictionary<string, object>>();
+                var seriesHumedad = new List<Dictionary<string, object>>();
                 var categories = new List<string>();
                 var i = 0;
 
@@ -127,8 +127,10 @@ namespace WeatherLink.Services
                     // Se almacena la respuesta de la api en la variable local
                     listaClimaPorEstacion = jsonResponse["list"].ToList();
                     var promediosTemperaturaPorDia = new Dictionary<string, double>();
+                    var dataSeriesTemperatura = new List<double>();
+                    var promediosHumedadesPorDia = new Dictionary<string, double>();
+                    var dataSeriesHumedad = new List<double>();
                     var contadorHorasPorDia = new Dictionary<string, int>();
-                    var dataSeries = new List<double>();
 
                     // Se recorre cada valor retornado por la api
                     foreach (var dateClimaPorHora in listaClimaPorEstacion)
@@ -139,9 +141,11 @@ namespace WeatherLink.Services
                             DateTime.ParseExact(dateClimaPorHora["dt_txt"].ToString(), "yyyy-MM-dd HH:mm:ss",
                                 ci);
                         double temperatura;
+                        double humedad;
 
                         // Se parsea el valor de la temperatura a la variable local
                         double.TryParse(dateClimaPorHora["main"]["temp"].ToString(), out temperatura);
+                        double.TryParse(dateClimaPorHora["main"]["humidity"].ToString(), out humedad);
 
                         // Se obtiene el nombre del dia de la semana en español
                         var dayOfWeek = ci.DateTimeFormat.GetDayName(climaPorHora.DayOfWeek);
@@ -154,6 +158,9 @@ namespace WeatherLink.Services
                             promediosTemperaturaPorDia[
                                 $"{dayOfWeek} {climaPorHora.Day} {_meses[climaPorHora.Month].Substring(0, 3)}"
                             ] = 0;
+                            promediosHumedadesPorDia[
+                                $"{dayOfWeek} {climaPorHora.Day} {_meses[climaPorHora.Month].Substring(0, 3)}"
+                            ] = 0;
                             contadorHorasPorDia[
                                 $"{dayOfWeek} {climaPorHora.Day} {_meses[climaPorHora.Month].Substring(0, 3)}"
                             ] = 0;
@@ -164,6 +171,15 @@ namespace WeatherLink.Services
                             $"{dayOfWeek} {climaPorHora.Day} {_meses[climaPorHora.Month].Substring(0, 3)}"
                         ] += temperatura;
 
+                        if (contadorHorasPorDia[
+                            $"{dayOfWeek} {climaPorHora.Day} {_meses[climaPorHora.Month].Substring(0, 3)}"
+                        ] < 3)
+                        {
+                            promediosHumedadesPorDia[
+                                $"{dayOfWeek} {climaPorHora.Day} {_meses[climaPorHora.Month].Substring(0, 3)}"
+                            ] += humedad;
+                        }
+
                         // Se incrementa el contador de las horas por dia para cada estacion
                         contadorHorasPorDia[
                             $"{dayOfWeek} {climaPorHora.Day} {_meses[climaPorHora.Month].Substring(0, 3)}"
@@ -172,7 +188,7 @@ namespace WeatherLink.Services
 
                     Console.WriteLine($"Estacion {estacion.Name}:");
                     promediosTemperaturaPorDia.Remove(promediosTemperaturaPorDia.Keys.Last());
-
+                    Console.WriteLine("Temperaturas:");
                     // Se recorre todos los promedios almacenados hasta el momento por cada estacion
                     foreach (var key in promediosTemperaturaPorDia.Keys.ToList())
                     {
@@ -188,16 +204,31 @@ namespace WeatherLink.Services
                         }
 
                         // Se añade el promedio del dia a la variable que contendra todos los datos de las series para el grafico
-                        dataSeries.Add(promediosTemperaturaPorDia[key]);
+                        dataSeriesTemperatura.Add(promediosTemperaturaPorDia[key]);
 
                         Console.WriteLine($"{key}: {promediosTemperaturaPorDia[key]}");
                     }
 
+                    promediosHumedadesPorDia.Remove(promediosHumedadesPorDia.Keys.Last());
+                    Console.WriteLine("Humedades:");
+                    foreach (var key in promediosHumedadesPorDia.Keys.ToList())
+                    {
+                        promediosHumedadesPorDia[key] /= 3;
+                        promediosHumedadesPorDia[key] = Math.Round(promediosHumedadesPorDia[key], 2);
+                        dataSeriesHumedad.Add(promediosHumedadesPorDia[key]);
+                        Console.WriteLine($"{key}: {promediosHumedadesPorDia[key]}");
+                    }
+
                     // Se crea un nuevo diccionaro para retornar los valores de las series por cada estacion
-                    var nuevaSerie = new Dictionary<string, object>();
-                    nuevaSerie["name"] = estacion.Name;
-                    nuevaSerie["data"] = dataSeries;
-                    series.Add(nuevaSerie);
+                    var nuevaSerieTemperatura = new Dictionary<string, object>();
+                    nuevaSerieTemperatura["name"] = estacion.Name;
+                    nuevaSerieTemperatura["data"] = dataSeriesTemperatura;
+                    seriesTemperatura.Add(nuevaSerieTemperatura);
+
+                    var nuevaSerieHumedad = new Dictionary<string, object>();
+                    nuevaSerieHumedad["name"] = estacion.Name;
+                    nuevaSerieHumedad["data"] = dataSeriesHumedad;
+                    seriesHumedad.Add(nuevaSerieHumedad);
 
                     i++;
                 }
@@ -206,12 +237,14 @@ namespace WeatherLink.Services
                 return new
                 {
                     categories,
-                    series
+                    seriesHumedad,
+                    seriesTemperatura
                 };
             }
 
             return new { };
         }
+
 
         // Metodo que se ejecuta para actualizar los datos del clima para cada estacion
         public async Task ActualizarEstaciones()

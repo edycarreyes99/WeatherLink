@@ -271,12 +271,10 @@ namespace WeatherLink.Controllers
                 data = estacionEliminar
             });
         }
-
-        [AllowAnonymous]
+        
         [HttpGet]
         [Route("ActualizarEstaciones")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> ActualizarEstaciones()
         {
             await _weatherService.ActualizarEstaciones();
@@ -284,17 +282,15 @@ namespace WeatherLink.Controllers
             return Ok(new { });
         }
 
-        [AllowAnonymous]
         [HttpGet]
-        [Route("GenerarDatosParaGraficoDeTemperaturas")]
+        [Route("GenerarDatosParaGraficos")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GenerarDatosParaGraficoDeTemperaturas()
+        public async Task<IActionResult> GenerarDatosParaGraficos()
         {
             return Ok(new
             {
                 status = StatusCode(StatusCodes.Status200OK),
-                data = await _weatherService.GenerarDatosParaGraficoDeTemperatura()
+                data = await _weatherService.GenerarDatosParaGraficos()
             });
         }
     }
