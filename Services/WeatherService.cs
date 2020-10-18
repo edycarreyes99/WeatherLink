@@ -21,6 +21,22 @@ namespace WeatherLink.Services
         private readonly ConfigurableHttpClient _httpClient;
         private readonly ApiDbContext _apiDbContext;
 
+        private readonly string[] _meses =
+        {
+            "Enero",
+            "Febrero",
+            "Marzo",
+            "Abril",
+            "Mayo",
+            "Junio",
+            "Julio",
+            "Agosto",
+            "Septiembre",
+            "Octubre",
+            "Noviembre",
+            "Diciembre"
+        };
+
         // Constructor del servicio
         public WeatherService(ApiDbContext apiDbContext)
         {
@@ -90,21 +106,6 @@ namespace WeatherLink.Services
                 // Variables a utilizarse
                 var series = new List<Dictionary<string, object>>();
                 var categories = new List<string>();
-                string[] meses =
-                {
-                    "Enero",
-                    "Febrero",
-                    "Marzo",
-                    "Abril",
-                    "Mayo",
-                    "Junio",
-                    "Julio",
-                    "Agosto",
-                    "Septiembre",
-                    "Octubre",
-                    "Noviembre",
-                    "Diciembre"
-                };
                 var i = 0;
 
                 // Se recorre la lista de estaciones
@@ -147,25 +148,25 @@ namespace WeatherLink.Services
 
                         // Se verifica si el dia ya etaba almacenado en el diccionaro para inicializar el contador a 0
                         if (!promediosTemperaturaPorDia.ContainsKey(
-                            $"{dayOfWeek} {climaPorHora.Day} {meses[climaPorHora.Month].Substring(0, 3)}")
+                            $"{dayOfWeek} {climaPorHora.Day} {_meses[climaPorHora.Month].Substring(0, 3)}")
                         )
                         {
                             promediosTemperaturaPorDia[
-                                $"{dayOfWeek} {climaPorHora.Day} {meses[climaPorHora.Month].Substring(0, 3)}"
+                                $"{dayOfWeek} {climaPorHora.Day} {_meses[climaPorHora.Month].Substring(0, 3)}"
                             ] = 0;
                             contadorHorasPorDia[
-                                $"{dayOfWeek} {climaPorHora.Day} {meses[climaPorHora.Month].Substring(0, 3)}"
+                                $"{dayOfWeek} {climaPorHora.Day} {_meses[climaPorHora.Month].Substring(0, 3)}"
                             ] = 0;
                         }
 
                         // Se suma el valor actual de los promedio con el nuevo valor de la temperatura
                         promediosTemperaturaPorDia[
-                            $"{dayOfWeek} {climaPorHora.Day} {meses[climaPorHora.Month].Substring(0, 3)}"
+                            $"{dayOfWeek} {climaPorHora.Day} {_meses[climaPorHora.Month].Substring(0, 3)}"
                         ] += temperatura;
 
                         // Se incrementa el contador de las horas por dia para cada estacion
                         contadorHorasPorDia[
-                            $"{dayOfWeek} {climaPorHora.Day} {meses[climaPorHora.Month].Substring(0, 3)}"
+                            $"{dayOfWeek} {climaPorHora.Day} {_meses[climaPorHora.Month].Substring(0, 3)}"
                         ] += 1;
                     }
 
