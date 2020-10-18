@@ -11,7 +11,6 @@
     <list default="true" id="c94a409a-a4a2-4f58-9f41-4f458601b5ba" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WeatherLink/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WeatherLink/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/ApiController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/ApiController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Interfaces/IWeatherService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Interfaces/IWeatherService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Services/WeatherService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/WeatherService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -90,9 +89,9 @@
         <option value="$PROJECT_DIR$/Models/TemperaturasModel.cs" />
         <option value="$PROJECT_DIR$/Models/HumedadModel.cs" />
         <option value="$PROJECT_DIR$/Models/TemperaturaModel.cs" />
-        <option value="$PROJECT_DIR$/Controllers/ApiController.cs" />
         <option value="$PROJECT_DIR$/Interfaces/IWeatherService.cs" />
         <option value="$PROJECT_DIR$/Services/WeatherService.cs" />
+        <option value="$PROJECT_DIR$/Controllers/ApiController.cs" />
       </list>
     </option>
   </component>
@@ -157,7 +156,7 @@
       <updated>1602368199871</updated>
       <workItem from="1602368208272" duration="5919000" />
       <workItem from="1602741984193" duration="64652000" />
-      <workItem from="1602966452283" duration="16567000" />
+      <workItem from="1602966452283" duration="18018000" />
     </task>
     <servers />
   </component>
@@ -186,22 +185,22 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="555" y="215" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1602786855951" />
-    <state width="1878" height="277" key="GridCell.Tab.0.bottom" timestamp="1602985882467">
+    <state width="1878" height="277" key="GridCell.Tab.0.bottom" timestamp="1602987726017">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="277" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1602985882467" />
-    <state width="1878" height="277" key="GridCell.Tab.0.center" timestamp="1602985882466">
+    <state width="1878" height="277" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1602987726017" />
+    <state width="1878" height="277" key="GridCell.Tab.0.center" timestamp="1602987726016">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="277" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1602985882466" />
-    <state width="1878" height="277" key="GridCell.Tab.0.left" timestamp="1602985882466">
+    <state width="1878" height="277" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1602987726016" />
+    <state width="1878" height="277" key="GridCell.Tab.0.left" timestamp="1602987726016">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="277" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1602985882466" />
-    <state width="1878" height="277" key="GridCell.Tab.0.right" timestamp="1602985882467">
+    <state width="1878" height="277" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1602987726016" />
+    <state width="1878" height="277" key="GridCell.Tab.0.right" timestamp="1602987726017">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="277" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1602985882467" />
+    <state width="1878" height="277" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1602987726017" />
     <state width="1878" height="342" key="GridCell.Tab.1.bottom" timestamp="1602837146773">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>

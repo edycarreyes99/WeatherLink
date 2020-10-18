@@ -257,7 +257,7 @@ namespace WeatherLink.Controllers
             {
                 _apiDbContext.Remove(estacionEliminar);
 
-                _apiDbContext.SaveChangesAsync();
+                _apiDbContext.SaveChanges();
             }
             catch
             {

@@ -186,9 +186,9 @@ namespace WeatherLink.Services
                         ] += 1;
                     }
 
-                    Console.WriteLine($"Estacion {estacion.Name}:");
+                    // Console.WriteLine($"Estacion {estacion.Name}:");
                     promediosTemperaturaPorDia.Remove(promediosTemperaturaPorDia.Keys.Last());
-                    Console.WriteLine("Temperaturas:");
+                    // Console.WriteLine("Temperaturas:");
                     // Se recorre todos los promedios almacenados hasta el momento por cada estacion
                     foreach (var key in promediosTemperaturaPorDia.Keys.ToList())
                     {
@@ -206,17 +206,17 @@ namespace WeatherLink.Services
                         // Se añade el promedio del dia a la variable que contendra todos los datos de las series para el grafico
                         dataSeriesTemperatura.Add(promediosTemperaturaPorDia[key]);
 
-                        Console.WriteLine($"{key}: {promediosTemperaturaPorDia[key]}");
+                        // Console.WriteLine($"{key}: {promediosTemperaturaPorDia[key]}");
                     }
 
                     promediosHumedadesPorDia.Remove(promediosHumedadesPorDia.Keys.Last());
-                    Console.WriteLine("Humedades:");
+                    // Console.WriteLine("Humedades:");
                     foreach (var key in promediosHumedadesPorDia.Keys.ToList())
                     {
                         promediosHumedadesPorDia[key] /= 3;
                         promediosHumedadesPorDia[key] = Math.Round(promediosHumedadesPorDia[key], 2);
                         dataSeriesHumedad.Add(promediosHumedadesPorDia[key]);
-                        Console.WriteLine($"{key}: {promediosHumedadesPorDia[key]}");
+                        // Console.WriteLine($"{key}: {promediosHumedadesPorDia[key]}");
                     }
 
                     // Se crea un nuevo diccionaro para retornar los valores de las series por cada estacion
