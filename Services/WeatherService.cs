@@ -82,43 +82,128 @@ namespace WeatherLink.Services
         public async Task<object> GenerarDatosParaGraficoDeTemperatura()
         {
             // Se extraen todas las estaciones de la base de datos y se guardan en una variable
-            var estaciones = _apiDbContext.Estaciones.ToList();
+            var estaciones = await _apiDbContext.Estaciones.ToListAsync();
 
-            var jsonResponse = new JObject();
-
-            estaciones.ForEach(async estacion =>
+            // Se determina si existen estaciones en la base de datos
+            if (estaciones.Count != 0)
             {
-                var url =
-                    $"http://api.openweathermap.org/data/2.5/forecast?lat={estacion.Latitude}&lon={estacion.Longitude}&appid=7e0e4e6cdce20a9faf2b59da4e37dcc2&units=metric";
-
-                var response = await _httpClient.GetAsync(url);
-
-                var estacionResponse = JObject.Parse(response.Content.ReadAsStringAsync().Result);
-
-                var fechasGenerales = new List<DateTime>();
-
-                foreach (var clima in estacionResponse["list"])
+                var series = new List<Dictionary<string, object>>();
+                var categories = new List<string>();
+                string[] diasSemana =
                 {
-                    var date = DateTime.ParseExact(clima["dt_txt"].ToString(), "yyyy-MM-dd HH:mm:ss",
-                        System.Globalization.CultureInfo.InvariantCulture).Date;
-                    fechasGenerales.Add(date);
+                    "Lunes",
+                    "Martes",
+                    "Miércoles",
+                    "Jueves",
+                    "Viernes",
+                    "Sábado",
+                    "Domingo"
+                };
+
+                string[] meses =
+                {
+                    "Enero",
+                    "Febrero",
+                    "Marzo",
+                    "Abril",
+                    "Mayo",
+                    "Junio",
+                    "Julio",
+                    "Agosto",
+                    "Septiembre",
+                    "Octubre",
+                    "Noviembre",
+                    "Diciembre"
+                };
+                var i = 0;
+                // Se recorre la lista de estaciones
+                foreach (var estacion in estaciones)
+                {
+                    var listaClimaPorEstacion = new List<JToken>();
+
+                    // Url de la api de clima
+                    var url =
+                        $"http://api.openweathermap.org/data/2.5/forecast?lat={estacion.Latitude}&lon={estacion.Longitude}&appid=7e0e4e6cdce20a9faf2b59da4e37dcc2&units=metric";
+
+                    // Se realiza la peticion a la api
+                    var response = await _httpClient.GetAsync(url);
+
+                    // Se parsea el contenido de la respuesta a un archivo json
+                    var jsonResponse = JObject.Parse(response.Content.ReadAsStringAsync().Result);
+
+                    listaClimaPorEstacion = jsonResponse["list"].ToList();
+
+                    var promediosTemperaturaPorDia = new Dictionary<string, double>();
+
+                    var contadorHorasPorDia = new Dictionary<string, int>();
+
+                    var dataSeries = new List<double>();
+                    foreach (var dateClimaPorHora in listaClimaPorEstacion)
+                    {
+                        CultureInfo ci = new CultureInfo("Es-Es");
+                        var climaPorHora =
+                            DateTime.ParseExact(dateClimaPorHora["dt_txt"].ToString(), "yyyy-MM-dd HH:mm:ss",
+                                ci);
+
+                        double temperatura;
+
+                        double.TryParse(dateClimaPorHora["main"]["temp"].ToString(), out temperatura);
+
+                        var dayOfWeek = ci.DateTimeFormat.GetDayName(climaPorHora.DayOfWeek);
+
+                        if (!promediosTemperaturaPorDia.ContainsKey(
+                            $"{dayOfWeek} {climaPorHora.Day} {meses[climaPorHora.Month].Substring(0, 3)}")
+                        )
+                        {
+                            promediosTemperaturaPorDia[
+                                $"{dayOfWeek} {climaPorHora.Day} {meses[climaPorHora.Month].Substring(0, 3)}"
+                            ] = 0;
+                            contadorHorasPorDia[
+                                $"{dayOfWeek} {climaPorHora.Day} {meses[climaPorHora.Month].Substring(0, 3)}"
+                            ] = 0;
+                        }
+
+                        promediosTemperaturaPorDia[
+                            $"{dayOfWeek} {climaPorHora.Day} {meses[climaPorHora.Month].Substring(0, 3)}"
+                        ] += temperatura;
+
+                        contadorHorasPorDia[
+                            $"{dayOfWeek} {climaPorHora.Day} {meses[climaPorHora.Month].Substring(0, 3)}"
+                        ] += 1;
+                    }
+
+                    Console.WriteLine($"Estacion {estacion.Name}:");
+                    promediosTemperaturaPorDia.Remove(promediosTemperaturaPorDia.Keys.Last());
+                    foreach (var key in promediosTemperaturaPorDia.Keys.ToList())
+                    {
+                        promediosTemperaturaPorDia[key] /= contadorHorasPorDia[key];
+                        promediosTemperaturaPorDia[key] = Math.Round(promediosTemperaturaPorDia[key], 2);
+                        if (i == 0)
+                        {
+                            categories.Add(key);
+                        }
+
+                        dataSeries.Add(promediosTemperaturaPorDia[key]);
+
+                        Console.WriteLine($"{key}: {promediosTemperaturaPorDia[key]}");
+                    }
+
+                    var nuevaSerie = new Dictionary<string, object>();
+                    nuevaSerie["name"] = estacion.Name;
+                    nuevaSerie["data"] = dataSeries;
+                    series.Add(nuevaSerie);
+
+                    i++;
                 }
 
-                List<List<DateTime>> fechasAgrupadasPorDia = fechasGenerales
-                    .GroupBy(x => x.Date.Day)
-                    .Select(g => g.ToList())
-                    .ToList();
-                Console.WriteLine($"Dias para {estacion.Name}");
-                fechasAgrupadasPorDia.ForEach(fecha =>
+                return new
                 {
-                    fecha.ForEach(fechaInterna => { Console.WriteLine(fechaInterna); });
-                });
-            });
+                    categories,
+                    series
+                };
+            }
 
-            return new
-            {
-                data = jsonResponse
-            };
+            return new { };
         }
 
         // Metodo que se ejecuta para actualizar los datos del clima para cada estacion

@@ -283,5 +283,19 @@ namespace WeatherLink.Controllers
 
             return Ok(new { });
         }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("GenerarDatosParaGraficoDeTemperaturas")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GenerarDatosParaGraficoDeTemperaturas()
+        {
+            return Ok(new
+            {
+                status = StatusCode(StatusCodes.Status200OK),
+                data = await _weatherService.GenerarDatosParaGraficoDeTemperatura()
+            });
+        }
     }
 }
