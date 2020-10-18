@@ -25,8 +25,6 @@
       <e p="Models" t="Include">
         <e p="ErrorViewModel.cs" t="Include" />
         <e p="EstacionesViewModel.cs" t="Include" />
-        <e p="HumedadModel.cs" t="Include" />
-        <e p="TemperaturaModel.cs" t="Include" />
       </e>
       <e p="Program.cs" t="Include" />
       <e p="Properties" t="Include">

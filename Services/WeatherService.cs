@@ -87,19 +87,9 @@ namespace WeatherLink.Services
             // Se determina si existen estaciones en la base de datos
             if (estaciones.Count != 0)
             {
+                // Variables a utilizarse
                 var series = new List<Dictionary<string, object>>();
                 var categories = new List<string>();
-                string[] diasSemana =
-                {
-                    "Lunes",
-                    "Martes",
-                    "Miércoles",
-                    "Jueves",
-                    "Viernes",
-                    "Sábado",
-                    "Domingo"
-                };
-
                 string[] meses =
                 {
                     "Enero",
@@ -116,9 +106,11 @@ namespace WeatherLink.Services
                     "Diciembre"
                 };
                 var i = 0;
+
                 // Se recorre la lista de estaciones
                 foreach (var estacion in estaciones)
                 {
+                    // Variable para almacenar la respuesta desde la api de OPEN WEATHER
                     var listaClimaPorEstacion = new List<JToken>();
 
                     // Url de la api de clima
@@ -131,26 +123,29 @@ namespace WeatherLink.Services
                     // Se parsea el contenido de la respuesta a un archivo json
                     var jsonResponse = JObject.Parse(response.Content.ReadAsStringAsync().Result);
 
+                    // Se almacena la respuesta de la api en la variable local
                     listaClimaPorEstacion = jsonResponse["list"].ToList();
-
                     var promediosTemperaturaPorDia = new Dictionary<string, double>();
-
                     var contadorHorasPorDia = new Dictionary<string, int>();
-
                     var dataSeries = new List<double>();
+
+                    // Se recorre cada valor retornado por la api
                     foreach (var dateClimaPorHora in listaClimaPorEstacion)
                     {
-                        CultureInfo ci = new CultureInfo("Es-Es");
+                        // Se establece una variable para la cultura español del parsing de la varibale date
+                        var ci = new CultureInfo("Es-Es");
                         var climaPorHora =
                             DateTime.ParseExact(dateClimaPorHora["dt_txt"].ToString(), "yyyy-MM-dd HH:mm:ss",
                                 ci);
-
                         double temperatura;
 
+                        // Se parsea el valor de la temperatura a la variable local
                         double.TryParse(dateClimaPorHora["main"]["temp"].ToString(), out temperatura);
 
+                        // Se obtiene el nombre del dia de la semana en español
                         var dayOfWeek = ci.DateTimeFormat.GetDayName(climaPorHora.DayOfWeek);
 
+                        // Se verifica si el dia ya etaba almacenado en el diccionaro para inicializar el contador a 0
                         if (!promediosTemperaturaPorDia.ContainsKey(
                             $"{dayOfWeek} {climaPorHora.Day} {meses[climaPorHora.Month].Substring(0, 3)}")
                         )
@@ -163,10 +158,12 @@ namespace WeatherLink.Services
                             ] = 0;
                         }
 
+                        // Se suma el valor actual de los promedio con el nuevo valor de la temperatura
                         promediosTemperaturaPorDia[
                             $"{dayOfWeek} {climaPorHora.Day} {meses[climaPorHora.Month].Substring(0, 3)}"
                         ] += temperatura;
 
+                        // Se incrementa el contador de las horas por dia para cada estacion
                         contadorHorasPorDia[
                             $"{dayOfWeek} {climaPorHora.Day} {meses[climaPorHora.Month].Substring(0, 3)}"
                         ] += 1;
@@ -174,20 +171,28 @@ namespace WeatherLink.Services
 
                     Console.WriteLine($"Estacion {estacion.Name}:");
                     promediosTemperaturaPorDia.Remove(promediosTemperaturaPorDia.Keys.Last());
+
+                    // Se recorre todos los promedios almacenados hasta el momento por cada estacion
                     foreach (var key in promediosTemperaturaPorDia.Keys.ToList())
                     {
+                        // Se divide entre la cantidad de horas por dia para determinar el promedio de temperatura por dia de cada estacion
                         promediosTemperaturaPorDia[key] /= contadorHorasPorDia[key];
+
+                        // Se redondea a unicamente 2 decimales
                         promediosTemperaturaPorDia[key] = Math.Round(promediosTemperaturaPorDia[key], 2);
+
                         if (i == 0)
                         {
                             categories.Add(key);
                         }
 
+                        // Se añade el promedio del dia a la variable que contendra todos los datos de las series para el grafico
                         dataSeries.Add(promediosTemperaturaPorDia[key]);
 
                         Console.WriteLine($"{key}: {promediosTemperaturaPorDia[key]}");
                     }
 
+                    // Se crea un nuevo diccionaro para retornar los valores de las series por cada estacion
                     var nuevaSerie = new Dictionary<string, object>();
                     nuevaSerie["name"] = estacion.Name;
                     nuevaSerie["data"] = dataSeries;
@@ -196,6 +201,7 @@ namespace WeatherLink.Services
                     i++;
                 }
 
+                // Se retornan los valores de las series y las cateogorias para el grafico
                 return new
                 {
                     categories,
